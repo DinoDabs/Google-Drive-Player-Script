@@ -4,9 +4,11 @@ include "curl_gd.php";
 
 if($_GET['url'] != ""){
 	$gid = $_GET['url'];
-	$original_id = my_simple_crypt($gid, 'd');
-	$title = fetch_value(file_get_contents_curl('https://drive.google.com/get_video_info?docid='.$original_id), "title=", "&");
-	$url = 'https://drive.google.com/file/d/'.$original_id.'/view';
+	 $pattern='/(?<=file\/d\/)(.*)(?=\/)/';
+    $succefss = preg_match($pattern, $gid, $maftch);
+    $dbken = $maftch[0];
+        $title = fetch_value(file_get_contents_curl('https://drive.google.com/get_video_info?docid='.$dbken), "title=", "&");
+	$url = 'https://drive.google.com/file/d/'.$dbken.'/view';
 	$linkdown = Drive($url);
 	
 }
