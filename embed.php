@@ -9,6 +9,7 @@ if($_GET['url'] != ""){
     $dbken = $maftch[0];
         $title = fetch_value(file_get_contents_curl('https://drive.google.com/get_video_info?docid='.$dbken), "title=", "&");
 	$url = 'https://drive.google.com/file/d/'.$dbken.'/view';
+	$posterimg = PosterImg($url);
 	$linkdown = Drive($url);
 	
 }
